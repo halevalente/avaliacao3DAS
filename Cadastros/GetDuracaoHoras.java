@@ -22,26 +22,38 @@ public class GetDuracaoHoras {
 
 	public int calcular() {
 		if (horaTermino == horaInicio)
-			duracaoHoras = 0;
+			setDuracaoHoras(0);
 		if (horaTermino > horaInicio) //varias possibilidades... 
-			if (horaTermino == horaInicio + 1) {  
+			if (horaTermino == adicionar(horaInicio, 1)) {  
 				if (minutosTermino < minutosInicio)  //nao chegou a uma hora
-					duracaoHoras = 0;
+					setDuracaoHoras(0);
 				else //durou pelo menos uma hora
-					duracaoHoras = 1;
+					setDuracaoHoras(1);
 			} else { //possivelmente ultrapassou duas horas
-				if (horaTermino - horaInicio > 2) //
-					duracaoHoras = horaTermino - horaInicio;
-				else if (horaTermino - horaInicio == 2 &&   //certamente menos de duas horas  
+				if (subtrair(horaTermino, horaInicio) > 2) //
+					setDuracaoHoras(subtrair(horaTermino, horaInicio));
+				else if (subtrair(horaTermino, horaInicio) == 2 &&   //certamente menos de duas horas  
 						 minutosTermino < minutosInicio)    //e mais de uma hora
-					duracaoHoras = 1;
+					setDuracaoHoras(1);
 				else //duracao de duas horas, certamente
-					duracaoHoras = 2;
+					setDuracaoHoras(2);
 					
 			}
 		if (horaTermino < horaInicio) 
-			duracaoHoras = -1; //para casos em que a hora de termino nao foi registrada
+			setDuracaoHoras(-1); //para casos em que a hora de termino nao foi registrada
 		return duracaoHoras;
+	}
+	
+	public int subtrair(int arg1, int arg2) {
+		return arg1-arg2;
+	}
+	
+	public int adicionar(int arg1, int arg2) {
+		return arg1+arg2;
+	}
+	
+	void setDuracaoHoras(int duracao){
+		duracaoHoras = duracao;
 	}
 	
 	

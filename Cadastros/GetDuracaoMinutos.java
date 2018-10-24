@@ -16,13 +16,25 @@ public class GetDuracaoMinutos {
 	
 	int calcular() {
 		if (minutosTermino > minutosInicio) 
-			duracaoMinutos = minutosTermino - minutosInicio;
+			setDuracaoMinutos(subtrair(minutosTermino, minutosInicio));
 		else {
-			duracaoMinutos = 60 - minutosInicio + minutosTermino;
+			setDuracaoMinutos(adicionar(subtrair(60, minutosInicio), minutosTermino));
 			if (duracaoMinutos == 60) //caso especial
-				duracaoMinutos = 0;
+				setDuracaoMinutos(0);
 		}
 		return duracaoMinutos;
+	}
+	
+	public int subtrair(int arg1, int arg2) {
+		return arg1-arg2;
+	}
+	
+	public int adicionar(int arg1, int arg2) {
+		return arg1+arg2;
+	}
+	
+	void setDuracaoMinutos(int duracao){
+		duracaoMinutos = duracao;
 	}
 	
 }
